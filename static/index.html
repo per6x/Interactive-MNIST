@@ -12,10 +12,9 @@
 </head>
 <body>
     <h1>Draw on Canvas</h1>
-    <canvas id="canvas" width="400" height="400"></canvas>
+    <canvas id="canvas" width="500" height="500"></canvas>
     <br>
     <div id="prediction"></div>
-    <button id="submit_btn">Submit</button>
     <button id="clear_btn">Clear</button>
 
     <script type="text/javascript">
@@ -24,7 +23,6 @@
            
             // Get the canvas element and its context
             var canvas = document.getElementById('canvas');
-            var submit_button = document.getElementById('submit_btn');
             var clear_button = document.getElementById('clear_btn');
             var context = canvas.getContext('2d');
             

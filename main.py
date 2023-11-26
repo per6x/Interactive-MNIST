@@ -27,8 +27,7 @@ model = load_model('models/mnist')
 def preprocess_image(image):
     img = image.convert("L")
     img = img.resize((28, 28))
-    img = np.array(img)
-    img = img / 255.0
+    img = np.array(img) / 255.0
 
     img_array = img.reshape((1, 28, 28, 1))
     return img_array
@@ -66,9 +65,8 @@ def predict_from_drawing(image_data: str):
         # Preprocess the image for prediction
         img_array = preprocess_image(image)
         # Perform prediction using the loaded model
-        prediction = model.predict(img_array)
+        prediction = model.predict(img_array, verbose=0)
         predicted_class = np.argmax(prediction)
-        print(prediction)
         return {"class": int(predicted_class), "confidence": float(prediction[0][predicted_class])}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
@@ -79,9 +77,3 @@ def predict_from_drawing(image_data: str):
 async def read_root():
     html_file_path = Path("static/index.html")  # Adjust the path accordingly
     return FileResponse(html_file_path)
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run(app, host="0.0.0.0", port=8000)
